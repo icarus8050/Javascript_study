@@ -1,5 +1,8 @@
 ## 2021. 09. 11 - OT
 
+### Notion
+https://east-kilogram-569.notion.site/OT-21442ba1abfc4fe597fbc2526d4b4fde
+
 ### 자기소개
 
 icebear2n2: 취준생, 프로젝트 작은 거라도 하나 제대로 만들어 보고 싶다 !  
