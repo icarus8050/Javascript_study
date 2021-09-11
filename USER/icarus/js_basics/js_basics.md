@@ -73,13 +73,13 @@
 ```
 * HTML 을 parsing 하는 동안 script 를 다운로드하고, HTML 이 모두 parsing 되었을 때 script 를 실행하므로 blocking 시간을 최소한으로 줄일 수 있다.  
 
-![head_defer](head_defer.png)
+![head_defer](images/head_defer.png)
 
 * async 로 script 를 다운로드하게 되면, 순서에 상관없이 먼저 다운로드 된 순서대로 실행하기 때문에 script 가 선언 순서에 의존적인 상황이라면 문제가 발생할 수 있다.
-![multi_script_async.png](multi_script_async.png)
+![multi_script_async.png](images/multi_script_async.png)
 
 * defer 은 HTML 이 parsing 되는 동안 fetching 을 하고, script 가 선언된 순서대로 실행된다.
-![multi_script_defer.png](multi_script_defer.png)
+![multi_script_defer.png](images/multi_script_defer.png)
 
 ### use strict
 * ECMAScript 5에서 추가되었다.
