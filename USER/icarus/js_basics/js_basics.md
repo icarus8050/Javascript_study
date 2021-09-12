@@ -81,7 +81,97 @@
 * defer 은 HTML 이 parsing 되는 동안 fetching 을 하고, script 가 선언된 순서대로 실행된다.
 ![multi_script_defer.png](images/multi_script_defer.png)
 
-### use strict
+---
+
+## use strict
+
 * ECMAScript 5에서 추가되었다.
 * 선언되지 않은 변수에 값을 할당한다던지, 기존에 존재하는 prototype 을 변경하는 위험한 상황을 방지할 수 있다.
 * 자바스크립트 엔진이 자바스크립트를 좀 더 빠르고 효율적으로 분석할 수 있기 때문에 성능상으로 유리하다.
+
+---
+
+## Data types, let vs var, hoisting
+
+### block scope
+
+* ES6 에서는 let 이라는 키워드로 변수를 선언한다.
+* {} 안에서 변수를 선언하면 해당 블록 스코프 안에서만 접근이 가능하다. 가장 바깥에서 선언하면 global scope 로 어떤 위치에서든 접근이 가능하다.
+* global scope 의 변수들은 어플리케이션이 시작부터 끝날 때까지 메모리에 살아있으므로 최대한 사용하지 않는 것이 좋다.
+```javascript
+{
+    let name = 'foo'
+    console.log(name)
+}
+// console.log(name) -> 블록 스코프 안에서만 유효하므로 name 변수에 접근 불가
+```
+
+### var 를 사용해서는 안되는 이유
+
+1. js 에서는 변수를 선언도 하기 전에 값을 할당하여 사용할 수 있다. 그리고 사용도 가능하다.
+   * let 을 이용하면 변수를 선언하기 전에 사용이 불가능하다.
+   * var 가 선언도 하기 전에 사용가능한 이유는 hoisting 때문이다.
+   * hoisting 은 어디에 선언했는지에 상관없이 선언을 제일 위로 끌어 올려주는 것이다.
+2. var 는 block scope 이 없다.
+   1. IE 를 제외한 major 브라우저에서는 es6 를 지원하므로 let 키워드를 사용할 수 있다.
+
+### const
+
+* 한 번 설정하면 변하지 않는 변수
+* 불변성은 함수형 프로그래밍의 핵심이다.
+```javascript
+const number = 5
+// number = 1 -> 값을 변경할 수 없다.
+```
+
+### variables type
+
+* primitive
+  * number, string, boolean, null, undefined, symbol
+* object
+* function
+  * js 에서 함수는 first-class 이다.
+* Infinity -> 양수 값을 0으로 나누었을 때
+* -Infinity -> 음수 값을 0으로 나누었을 때
+* NaN (Not a Number) -> 문자열을 숫자로 나누었을 때
+* bigint -> 최근에 추가된 타입으로, 변수에 할당 가능한 최대의 숫자를 넘겨서 할당했을 때 타입이 지정된다.
+  * 최근에 추가되었기 때문에 모든 브라우저에서 지원하지 않는다.
+
+#### boolean
+
+* false 로 인식하는 경우
+  * 0, null, undefined, NaN, ''
+* true 로 인식하는 경우
+  * false 로 인식하는 경우를 제외한 모든 경우
+
+#### null 과 undefined
+
+* null
+  * 명시적으로 비어있는 empty 값이라고 지정하는 경우다.
+* undefined
+  * 정의되지 않은 것
+  * 초기화 되어 있지 않거나 존재하지 않은 객체의 프로퍼티 및 존재하지 않는 배열의 원소값에 접근하려고 할 때 얻어지는 변수의 값
+  * 결과적으로 data type 이자, 값을 나타낸다.
+
+#### symbol
+
+* map 과 같은 자료구조에서 고유한 식별자를 필요로 할 때 사용한다.
+* symbol 은 동일한 string 으로 작성했어도 서로 다른 symbol 로 만들어진다.
+* 동일한 string 으로 동일한 symbol 을 만들고 싶다면 for() 메서드를 이용한다.
+* symbol 을 출력할 때는 description 프로퍼티를 이용하여 출력한다.
+```javascript
+const symbol1 = Symbol('id');
+const symbol2 = Symbol('id');
+console.log(symbol1 === symbol2); //false
+
+const gSymbol1 = Symbol.for('id');
+const gSymbol2 = Symbol.for('id');
+console.log(gSymbol1 === gSymbol2); //true
+
+console.log(`${symbol1.description}`) //id
+```
+
+### dynamic typing
+
+* 변수를 선언할 때 어떤 타입인지 선언하지 않고, 런타임에 할당된 값에 따라서 타입이 변경될 수 있다.
+* 런타임에서 타입이 정해지기 때문에 예상치 못한 타입의 변경으로 인해 문제가 발생할 수 있다.
