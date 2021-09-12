@@ -601,3 +601,13 @@ const simplePrint = () => console.log('simplePrint');
 
 ```
 
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+__Noted at 2021. 09. 12__
+
