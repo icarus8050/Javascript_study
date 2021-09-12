@@ -175,3 +175,38 @@ console.log(`${symbol1.description}`) //id
 
 * 변수를 선언할 때 어떤 타입인지 선언하지 않고, 런타임에 할당된 값에 따라서 타입이 변경될 수 있다.
 * 런타임에서 타입이 정해지기 때문에 예상치 못한 타입의 변경으로 인해 문제가 발생할 수 있다.
+
+### Equality
+
+* '==' 는 loose equality 이다.
+  * 값을 비교할 때 타입을 변경하여 비교한다.
+```javascript
+const stringFive = '5';
+const numberFive = 5;
+console.log(stringFive == numberFive); //true
+console.log(stringFive != numberFive); //false
+```
+
+* '===' 는 strict equality 이다.
+  * 값을 비교할 때 타입까지 함께 비교한다. (타입이 다르면 false 이다.)
+  * 왠만하면 strict equality 를 이용하여 비교하는 것이 좋다.
+```javascript
+const stringFive = '5';
+const numberFive = 5;
+console.log(stringFive === numberFive); //false
+console.log(stringFive !== numberFive); //true
+```
+
+* object 와 같은 참조형은 레퍼런스 주소를 변수에 할당한다.
+  * foo1 == foo2 는 두 객체의 레퍼런스 주소가 다르므로 false 이다.
+  * foo1 === foo2 는 두 객체의 레퍼런스 주소가 다르므로 false 이다.
+  * foo1 === foo3 는 두 객체의 레퍼런스 주소가 같고, 같은 타입이므로 true 이다.
+```javascript
+const foo1 = { name: 'hello' };
+const foo2 = { name: 'hello' };
+const foo3 = foo1
+console.log(foo1 == foo2); //false
+console.log(foo1 === foo2); //false
+console.log(foo1 === foo3); //true
+```
+
