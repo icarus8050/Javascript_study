@@ -601,13 +601,212 @@ const simplePrint = () => console.log('simplePrint');
 
 ```
 
-<br />
+<br>
 
-<br />
+<br>
 
-<br />
+<br>
 
-<br />
+<br>
 
-__Noted at 2021. 09. 12__
+###### 자바스크립트 6. 클래스와 오브젝트의 차이점(class vs object), 객체지향 언어 클래스 정리 <a href="https://youtu.be/_DLhUBWsRtw">Link</a>
+
+**객체지향언어**
+
+class 는 조금 더 연관 있는 것들을 한데 묶어놓는 것. *class 안에는 속성 (fields), 행동 (methods) 가 포함되어 있음.*
+
+class 를 이용하여 새로운 instance 를 생성하는 것이 Object
+
+- Class <span style="color: lightgrey;">template</span>
+
+- Object <span style="color: lightgrey;">Instance of class</span>
+
+  - class 선언
+
+    ```javascript
+    class Person {
+        // constructor; 생성자 
+        constructor(name, age) {
+            // fields
+            this.name = name;
+            this.age = age;
+        }
+        speak() {
+            console.log(`${this.name} : hello!`);
+        }
+    }
+    ```
+
+    ```javascript
+    const ellie = new Person('ellie', 20);
+    console.log(ellie.name);
+    console.log(ellie.age);
+    ```
+
+    ![image](https://user-images.githubusercontent.com/89691274/132990407-7a391e46-37e7-4436-aa8a-7df810c96742.png)
+
+    ```javascript
+    ellie.speak();
+    ```
+
+    ![image](https://user-images.githubusercontent.com/89691274/132990431-7bc42ace-51dd-4f52-802f-cff6d24b3b7b.png)
+
+  - Getter and Setters
+
+    ```javascript
+    class User{
+        constructor(firstName, lastName, age) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.age = age;
+        }
+        get() {
+            // get() 을 이용하여 값을 return
+            return this.age;
+        }
+        set(value) {
+            // set() 을 이용하며 값을 set. value를 받아와야 함.
+            this.age = value;
+        }
+    }
+    
+    ```
+
+    _Age 라는 getter를 정의하는 순간 this.age 는 getter 를 호출함._ 
+
+    _setter 를 정의하는 순간 this.age = age; 가 할당되는 것이 아니라 setter가 호출됨_
+
+    ![image](https://user-images.githubusercontent.com/89691274/132990648-b63c36d9-be02-4097-a5ea-fc785bf51d8c.png)
+
+    _holy cannot following this ......._
+
+    Getter 와 Setter 안에 쓰이는 변수는 째금씩 이름을 바꿔준다. 겹치지 않게! 
+
+    ```javascript
+    class User{
+        constructor(firstName, lastName, age) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.age = age;
+        }
+        get() {
+            // get() 을 이용하여 값을 return
+            return this._age;
+        }
+        set(value) {
+            // set() 을 이용하며 값을 set. value를 받아와야 함.
+            this._age = value < 0 ? 0 : value;
+            // value 가 0 보다 작으면 0 을 설정함.
+        }
+    }
+    ```
+
+    <br>
+
+  - Static (just 참고)
+
+    Class 안의 fields 와 methods 들은 새로운 object 가 생성될 때마다 고대로 복제되어서 값만 지정값으로 변경됨. 간혹, object 와 data 에 상관 없이 동일하게 사용되는 것들이 있다. 그럴 때 Static 을 사용함! 
+
+    ```javascript
+    class Article {
+        static publisher = 'dream coding';	
+    	constructor(articleNum) {
+            this.articleNum = articleNum;
+        }
+    	stact printPublisher() {
+            console.log(Article.publisher);
+        }
+    }
+    console.log(Article.publisher);
+    Article.printPublisher();
+    
+    // Tips.
+    // static 은 Object 마다 할당되는 것이 아니라, Class 단위로 할당이 되기 때문에
+    // console.log(article1.publisher); 이렇게 쓰면 값이 undefined 로 나온다.
+    // 그러므로 console.log(Article.publisher); class 단위로 이렇게 써야 잘 굴러감. 
+    // 함수를 호출할 때도 마찬가지! 
+    ```
+
+    _ref_ Typescript 에서도 자주 쓰임. Object 에 상관 없이 공통적으로 class 에서 쓸 수 있는 거라면 static 을 자주 씀! 
+
+    <br>
+
+  - Inheritance and overriding상속과 다양성
+
+    ```javascript
+    class Shape { 
+    	constructor(width, height, color) {
+            // 세가지의 fields
+            this.width = width;
+            this.height = height;
+            this.color = color;
+        }
+        // methods 두 개
+        draw() {
+            console.log(`drawing  ${this.color} color of`);
+        }
+        getArea() {
+            return this.width * this.height;
+        }
+    }
+    
+    class Regtangle extends Shape{} 
+        // Rentangle 이라는 class 를 만들고 싶으면 shape 으로 연장. 
+        // Shape 에서 정의한 것이 자동적으로 Regtangle 에 포함
+    const regtangle = new Regtangle(20, 20, 'blue');
+    regtangle.draw();
+    console.log(regtangle.getArea());
+    ```
+
+    ![image](https://user-images.githubusercontent.com/89691274/132991200-2b171f1b-dce1-4a0d-a243-c0aee0ab0c86.png)
+
+    ```javascript
+    class Triangle extends Shape {
+        // 이미 정의된 class 를 끌어와서 수정 가능 overriding
+        // 즉, 필요한 함수만 재정의해서 사용!
+         getArea() {
+            return (this.width * this.height) / 2;
+        }
+    }
+    const triangle = new Triangle(20, 20, 'red');
+    triangle.draw();
+    console.log(triangle.getArea());
+    ```
+
+    ![image](https://user-images.githubusercontent.com/89691274/132991362-75ae8b81-2ac1-4343-886b-7f86aba16644.png)
+
+    <br>
+
+  - instanceOf 
+    Class 를 이용하여 만들어진 새로운 instance
+
+    ```javascript
+    console.log(regtangle instanceof Regtangle);
+    console.log(triangle instanceof Regtangle);
+    console.log(triangle instanceof Triangle);
+    console.log(triangle instanceof Shape);
+    console.log(triangle instanceof Object);
+    // 왼쪽에 있는 object 가 오른쪽에 있는 class 의 instance 인지 아닌지,
+    // 해당 object 가 오른쪽 class 를 이용하여 만들어진 것이 맞는지 아닌지 true or false return
+    ```
+
+    ![image](https://user-images.githubusercontent.com/89691274/132991547-7ae2dfd2-6e15-46ef-ad87-a116027d8c0d.png)
+
+    <br>
+
+- **reference!** : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
+
+  자바스크립트의 objects!
+
+  <br />
+
+  <br />
+
+  <br />
+
+  <br />
+
+  __Noted at 2021. 09. 12__
+
+  
 
