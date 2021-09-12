@@ -10,8 +10,6 @@
 <br/>
 <br/>
 
-### Notion
-https://east-kilogram-569.notion.site/JS-84a5a57a47c048dca2a2e1552ca9dc12
 
 <hr/>
 
