@@ -210,3 +210,34 @@ console.log(foo1 === foo2); //false
 console.log(foo1 === foo3); //true
 ```
 
+---
+
+## 함수
+
+* 함수는 오브젝트이다. 즉, 변수에 할당할 수도 있고, 파라미터로 전달하거나 리턴할 수도 있다.
+* ES6 에서는 Default parameter 를 지정할 수 있다.
+```javascript
+function showMessage(message, from = 'unknown') {
+    console.log(`${message} by ${from}`);
+}
+```
+* Rest Parameter 를 통해서 가변 배열 형태의 파라미터를 전달할 수도 있다.
+```javascript
+function printAll(...args) {
+    for (let i = 0; i < args.length; i++) {
+        console.log(args[i]);
+    }
+}
+printAll('hello', 'world', 'good')
+```
+* 함수 안에 또다른 함수를 정의할 수도 있다.
+  * 안쪽 함수에서는 바깥쪽 함수의 로컬 스코프 변수를 참조할 수 있지만, 바깥쪽 함수에서는 안쪽 함수의 로컬 스코프 변수를 참조할 수 없다.
+* 함수에 리턴이 명시되지 않았다면 undefined 를 리턴한다.
+* 함수는 hoisting 이 되므로 정의되기 전에 호출이 되어도 동작한다.
+* arrow function 은 항상 이름이 없는 익명 함수이며, () => expression 의 형태로 사용할 수 있다.
+```javascript
+const simplePrint = () => console.log('simplePring')
+const multiLinePrint = (a, b) => {
+    return a * b;
+}
+``` 
