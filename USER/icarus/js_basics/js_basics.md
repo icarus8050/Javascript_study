@@ -241,3 +241,36 @@ const multiLinePrint = (a, b) => {
     return a * b;
 }
 ``` 
+
+---
+
+## 클래스 정리
+
+* 클래스는 es6 부터 도입되어 사용되기 시작함.
+* getter 와 setter 를 사용할 때는 콜스택이 오버플로우 되는 것을 주의해야 한다.
+  * getter 와 setter 를 정의하면, 필드에 직접 접근하는 것이 아니라 getter 와 setter 에 접근하므로 무한 루프가 돌기 때문이다.
+```javascript
+class User {
+    constructor(firstName, lastName, age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
+    
+    get age() {
+        return this._age;
+    }
+    
+    set age(value) {
+        this._age = value;
+    }
+}
+```
+* 생성자가 아니라 필드로 선언하면 public, 해당 필드에 '#'을 붙이면 private 이다.
+  * private 필드는 외부에서 접근할 수 없다.
+* static 키워드를 사용하면 static 필드, 메서드를 선언할 수 있다.
+* static 은 object 가 아니라 클래스를 통해서 접근이 가능하다.
+* extends 키워드를 통해서 클래스를 상속할 수 있다.
+* override 한 메서드라는 것을 명시적으로 나타낼 키워드는 없다.
+* 슈퍼클래스에 접근할 때는 super 키워드를 사용한다.
+* instanceof 는 클래스 타입을 체크할 수 있는 키워드이다.
