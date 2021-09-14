@@ -175,3 +175,69 @@ console.log(`${symbol1.description}`) //id
 
 * 변수를 선언할 때 어떤 타입인지 선언하지 않고, 런타임에 할당된 값에 따라서 타입이 변경될 수 있다.
 * 런타임에서 타입이 정해지기 때문에 예상치 못한 타입의 변경으로 인해 문제가 발생할 수 있다.
+
+### Equality
+
+* '==' 는 loose equality 이다.
+  * 값을 비교할 때 타입을 변경하여 비교한다.
+```javascript
+const stringFive = '5';
+const numberFive = 5;
+console.log(stringFive == numberFive); //true
+console.log(stringFive != numberFive); //false
+```
+
+* '===' 는 strict equality 이다.
+  * 값을 비교할 때 타입까지 함께 비교한다. (타입이 다르면 false 이다.)
+  * 왠만하면 strict equality 를 이용하여 비교하는 것이 좋다.
+```javascript
+const stringFive = '5';
+const numberFive = 5;
+console.log(stringFive === numberFive); //false
+console.log(stringFive !== numberFive); //true
+```
+
+* object 와 같은 참조형은 레퍼런스 주소를 변수에 할당한다.
+  * foo1 == foo2 는 두 객체의 레퍼런스 주소가 다르므로 false 이다.
+  * foo1 === foo2 는 두 객체의 레퍼런스 주소가 다르므로 false 이다.
+  * foo1 === foo3 는 두 객체의 레퍼런스 주소가 같고, 같은 타입이므로 true 이다.
+```javascript
+const foo1 = { name: 'hello' };
+const foo2 = { name: 'hello' };
+const foo3 = foo1
+console.log(foo1 == foo2); //false
+console.log(foo1 === foo2); //false
+console.log(foo1 === foo3); //true
+```
+
+---
+
+## 함수
+
+* 함수는 오브젝트이다. 즉, 변수에 할당할 수도 있고, 파라미터로 전달하거나 리턴할 수도 있다.
+* ES6 에서는 Default parameter 를 지정할 수 있다.
+```javascript
+function showMessage(message, from = 'unknown') {
+    console.log(`${message} by ${from}`);
+}
+```
+* Rest Parameter 를 통해서 가변 배열 형태의 파라미터를 전달할 수도 있다.
+```javascript
+function printAll(...args) {
+    for (let i = 0; i < args.length; i++) {
+        console.log(args[i]);
+    }
+}
+printAll('hello', 'world', 'good')
+```
+* 함수 안에 또다른 함수를 정의할 수도 있다.
+  * 안쪽 함수에서는 바깥쪽 함수의 로컬 스코프 변수를 참조할 수 있지만, 바깥쪽 함수에서는 안쪽 함수의 로컬 스코프 변수를 참조할 수 없다.
+* 함수에 리턴이 명시되지 않았다면 undefined 를 리턴한다.
+* 함수는 hoisting 이 되므로 정의되기 전에 호출이 되어도 동작한다.
+* arrow function 은 항상 이름이 없는 익명 함수이며, () => expression 의 형태로 사용할 수 있다.
+```javascript
+const simplePrint = () => console.log('simplePring')
+const multiLinePrint = (a, b) => {
+    return a * b;
+}
+``` 
