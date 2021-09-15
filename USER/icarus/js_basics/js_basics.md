@@ -383,3 +383,42 @@ const mixed = Object.assign({}, fruit1, fruit2);
 console.log(mixed.color); // blue
 console.log(mixed.size); // big
 ```
+
+---
+
+## Array
+
+```javascript
+// 배열 선언 방법
+const arr1 = new Array();
+const arr2 = [1, 2];
+
+// push
+arr1.push(1);
+
+// pop
+let value = arr1.pop();
+
+// unshift = 배열의 앞부분부터 추가
+arr1.unshift(1, 2);
+
+// shift = 배열의 앞부분부터 제거
+// unshift 와 shift 는 push 와 pop 보다 매우 느리므로 주의한다. (배열의 길이가 길수록 더 느려진다.)
+arr1.shift();
+
+// 시작 인덱스부터 지정된 개수만큼 데이터를 지운다.
+arr1.splice(1, 3);
+
+// 개수를 지정하지 않으면 시작 인덱스부터 뒤의 데이터를 모두 지운다.
+arr1.splice(1);
+
+// 시작 인덱스부터 지정된 개수만큼 데이터를 지운 후에 새로운 데이터를 시작 인덱스부터 삽입한다.
+arr1.splice(1, 3, 4, 4);
+
+// 두 가지의 배열을 합치는 방법
+const numArr1 = [1, 2, 3];
+const numArr2 = [4, 5, 6];
+const numArr3 = numArr1.concat(numArr2); //1, 2, 3, 4, 5, 6
+```
+
+
