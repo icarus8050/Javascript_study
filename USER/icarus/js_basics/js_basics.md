@@ -357,6 +357,7 @@ console.log('age' in person);
 ```
 
 #### for..in vs for..of
+
 ```javascript
 // 객체의 모든 key 들을 이터레이션할 수 있다.
 for (key in person) {
@@ -377,8 +378,8 @@ const person = {name: 'foo', age: 2};
 var cloneObject = Object.assign({}, person);
 
 // assign 함수의 source 인자가 여러 개인 경우, 뒤에서부터 앞의 인자를 덮어쓴다.
-const fruit1 = { color: 'red' };
-const fruit2 = { color: 'blue', size: 'big' };
+const fruit1 = {color: 'red'};
+const fruit2 = {color: 'blue', size: 'big'};
 const mixed = Object.assign({}, fruit1, fruit2);
 console.log(mixed.color); // blue
 console.log(mixed.size); // big
@@ -421,4 +422,34 @@ const numArr2 = [4, 5, 6];
 const numArr3 = numArr1.concat(numArr2); //1, 2, 3, 4, 5, 6
 ```
 
+---
 
+## Promise
+
+* 비동기적 기능을 수행할 때, 콜백 함수 대신에 유용하게 사용할 수 있는 Object 이다.
+* 수행하는 기능이 정상적으로 동작했는지, 실패 했는지에 대한 상태를 state 라고 한다.
+* state: pending -> fulfilled or rejected
+
+```javascript
+// Producer
+// Producer 를 생성하는 순간 executor 가 자동으로 수행되어 동작한다.
+const promise = new Promise((resolve, reject) => {
+    console.log('doing something...');
+    setTimeout(() => {
+        // resolve('foo');
+        reject(new Error('no network'));
+    }, 2000);
+});
+
+// Consumer : then, catch, finally
+promise
+    .then((value) => {
+        console.log(value)
+    })
+    .catch(error => {
+        console.log(error);
+    })
+    .finally(() => {
+        console.log('finally');
+    });
+```
